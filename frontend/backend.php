@@ -5,20 +5,33 @@ $username = "u104036906_admin";
 $password = "Helader@1";
 $database = "u104036906_nombres";
 
+// Intentar establecer la conexión
 $conn = new mysqli($servername, $username, $password, $database);
+
+// Verificar si hay errores de conexión
 if ($conn->connect_error) {
+    // Mostrar mensaje de error y finalizar el script
     die("Error de conexión: " . $conn->connect_error);
 }
 
 // Agregar un nuevo nombre
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST["nombre"];
+    // Verificar si se proporcionó un nombre
+    if (!empty($_POST["nombre"])) {
+        $nombre = $_POST["nombre"];
 
-    $sql = "INSERT INTO nombres (nombre) VALUES ('$nombre')";
-    if ($conn->query($sql) === TRUE) {
-        echo "Nombre agregado correctamente";
+        // Preparar la consulta SQL
+        $sql = "INSERT INTO nombres (nombre) VALUES ('$nombre')";
+
+        // Ejecutar la consulta SQL y manejar errores
+        if ($conn->query($sql) === TRUE) {
+            echo "Nombre agregado correctamente";
+        } else {
+            echo "Error al agregar el nombre: " . $conn->error;
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Mostrar mensaje de error si no se proporcionó un nombre
+        echo "Error: Se requiere un nombre para agregar";
     }
 }
 
@@ -26,24 +39,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $sql = "SELECT * FROM nombres";
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<li>{$row['nombre']} <button onclick=\"eliminarNombre({$row['id']})\">Eliminar</button></li>";
+// Verificar si se encontraron resultados
+if ($result) {
+    if ($result->num_rows > 0) {
+        // Mostrar la lista de nombres
+        while($row = $result->fetch_assoc()) {
+            echo "<li>{$row['nombre']} <button onclick=\"eliminarNombre({$row['id']})\">Eliminar</button></li>";
+        }
+    } else {
+        // Mostrar mensaje si no se encontraron resultados
+        echo "0 resultados";
     }
 } else {
-    echo "0 resultados";
+    // Mostrar mensaje de error si hubo un error en la consulta
+    echo "Error al obtener los nombres: " . $conn->error;
 }
 
 // Eliminar un nombre
 if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-    $id = $_GET["id"];
+    // Verificar si se proporcionó un ID para eliminar
+    if (!empty($_GET["id"])) {
+        $id = $_GET["id"];
 
-    $sql = "DELETE FROM nombres WHERE id=$id";
-    if ($conn->query($sql) === TRUE) {
-        echo "Nombre eliminado correctamente";
+        // Preparar la consulta SQL
+        $sql = "DELETE FROM nombres WHERE id=$id";
+
+        // Ejecutar la consulta SQL y manejar errores
+        if ($conn->query($sql) === TRUE) {
+            echo "Nombre eliminado correctamente";
+        } else {
+            echo "Error al eliminar el nombre: " . $conn->error;
+        }
     } else {
-        echo "Error al eliminar el nombre: " . $conn->error;
+        // Mostrar mensaje de error si no se proporcionó un ID para eliminar
+        echo "Error: Se requiere un ID para eliminar un nombre";
     }
 }
 
+// Cerrar la conexión
 $conn->close();
