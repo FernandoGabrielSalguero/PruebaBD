@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 // Agregar un nuevo nombre
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar si se proporcionó un nombre
-    if (!empty($_POST["nombre"])) {
+    if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         $nombre = $_POST["nombre"];
 
         // Preparar la consulta SQL
