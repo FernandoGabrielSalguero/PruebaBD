@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.text())
         .then(data => {
-            // console.log(data);
+            console.log('se ejecuto esto',data);
             // Actualizar la lista de nombres
         })
         .catch(error => console.error('Error:', error));
