@@ -74,7 +74,7 @@ if ($result) {
                     <input type='hidden' name='action' value='delete'>
                     <input type='hidden' name='id' value='{$row['id']}'>
                     <button type='submit'>Eliminar</button>
-                  </form></li>";
+                </form></li>";
         }
         echo "</ul>";
     } else {
