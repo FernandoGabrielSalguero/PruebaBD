@@ -1,9 +1,9 @@
 <?php
 // Conectar a la base de datos
-$servername = "nombre_de_servidor";
-$username = "nombre_de_usuario";
-$password = "contraseña";
-$database = "nombre_de_base_de_datos";
+$servername = "127.0.0.1:3306";
+$username = "u104036906_admin";
+$password = "Helader@1";
+$database = "u104036906_nombres";
 
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
