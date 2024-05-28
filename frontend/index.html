@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD de Nombres</title>
+    <title>CRUD con PHP y MySQL</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>CRUD de Nombres</h1>
-    <form id="form">
-        <input type="text" id="nombreInput" name="nombre" placeholder="Nombre" required>
-        <button type="submit">Agregar</button>
-    </form>
-    <ul id="listaNombres"></ul>
-
-    <script src="script.js" nonce="random_nonce_value"></script>
+    <h1>CRUD con PHP y MySQL</h1>
+    <div>
+        <h2>Crear Usuario</h2>
+        <form id="createForm">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit">Crear</button>
+        </form>
+    </div>
+    <div>
+        <h2>Usuarios</h2>
+        <button onclick="leerUsuarios()">Leer Usuarios</button>
+        <table id="usuariosTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
